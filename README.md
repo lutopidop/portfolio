@@ -1,15 +1,3 @@
-# Portfolio
-
-[![Website](https://img.shields.io/website?label=Website&url=https://nishchay17.vercel.app/)](https://nishchay17.vercel.app/) [![GitHub License](https://img.shields.io/github/license/nishchay17/teams-frontend-v2)](https://github.com/nishchay17/portfolio/blob/main/LICENSE)
-
-![image](https://github.com/nishchay17/portfolio/assets/48904113/770c2309-b742-4b3a-bc69-39614ad0e6b1)
-
-## Table of Contents
-
-- [About](#about)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [License](#license)
 
 ## About
 
@@ -38,7 +26,3 @@ yarn
 # Start the development server
 yarn dev
 ```
-
-## License
-
-This project is licensed under the [MIT License](https://github.com/nishchay17/portfolio/blob/main/LICENSE).
