@@ -4,7 +4,14 @@ type CircuitButtonSvgProps = {
   className?: string;
 };
 
-const pathVars = [
+type CircuitPathDef = {
+  d: string;
+  stroke: string;
+  i: number;
+  bottom?: boolean;
+};
+
+const pathVars: CircuitPathDef[] = [
   { d: "M0 1H185.5", stroke: "url(#cb_paint0)", i: 1 },
   { d: "M0 33H185.5", stroke: "url(#cb_paint1)", i: 2 },
   {
@@ -45,7 +52,7 @@ const pathVars = [
     i: 12,
     bottom: true,
   },
-] as const;
+];
 
 function CircuitPaths({ animated }: { animated?: boolean }) {
   const side = pathVars.filter((p) => !p.bottom);
