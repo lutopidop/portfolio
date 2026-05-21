@@ -1,0 +1,96 @@
+.loader {
+  --path: rgba(2, 6, 23, 0.55);
+  --dot: #ffffff;
+  --duration: 3s;
+  --text: #e9e0ff;
+
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.loader::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  position: absolute;
+  display: block;
+  background: var(--dot);
+  top: 37px;
+  left: 19px;
+  transform: translate(-18px, -18px);
+  animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rect {
+  fill: none;
+  stroke: var(--path);
+  stroke-width: 10px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 192 64 192 64;
+  stroke-dashoffset: 0;
+  animation: pathRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.letter {
+  fill: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+@keyframes pathRect {
+  25% {
+    stroke-dashoffset: 64;
+  }
+  50% {
+    stroke-dashoffset: 128;
+  }
+  75% {
+    stroke-dashoffset: 192;
+  }
+  100% {
+    stroke-dashoffset: 256;
+  }
+}
+
+@keyframes dotRect {
+  25% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, -18px);
+  }
+  75% {
+    transform: translate(0, -36px);
+  }
+  100% {
+    transform: translate(-18px, -18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rect,
+  .loader::before {
+    animation: none;
+  }
+
+  .loader::before {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

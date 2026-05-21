@@ -1,0 +1,578 @@
+.wrap {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+}
+
+.button {
+  --radius: 20px;
+  --navy-deep: #050a12;
+  --navy-mid: #0f1a2e;
+  --navy-accent: #1e3a5f;
+  --blue-glow: #3b82f6;
+  --blue-light: #93c5fd;
+
+  outline: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  position: relative;
+  min-width: 300px;
+  width: 100%;
+  height: 76px;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius);
+  display: block;
+}
+
+.button::before,
+.button::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  z-index: 0;
+  height: 50px;
+  width: 50%;
+  background: var(--navy-deep);
+  filter: blur(10px);
+  border-radius: 10px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.button::before {
+  left: -2px;
+  transform: rotate(-15deg);
+}
+
+.button::after {
+  right: -2px;
+  transform: rotate(15deg);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 200px 5px rgba(59, 130, 246, 0.35);
+  pointer-events: none;
+}
+
+.glow::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  background: rgba(30, 58, 95, 0.15);
+  border-radius: 50%;
+  filter: blur(50px);
+  inset: 0;
+  height: 500px;
+  width: 150px;
+  transform: rotate(-45deg);
+}
+
+.wave {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  margin: auto;
+  transition: all 0.3s linear;
+  pointer-events: none;
+}
+
+.wave::before,
+.wave::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 0.5px solid rgba(96, 165, 250, 0.45);
+  inset: 0;
+  filter: blur(2px);
+  border-radius: 30px;
+}
+
+.button:focus-visible .wave::before,
+.button:focus-visible .wave::after {
+  animation: wave 2.2s linear;
+}
+
+.button:focus-visible .wave::after {
+  animation-delay: 0.35s;
+}
+
+@keyframes wave {
+  0%,
+  40% {
+    transform: scale(1);
+    opacity: 0;
+    box-shadow:
+      0 0 30px 10px black,
+      inset 0 0 30px rgba(147, 197, 253, 0.12);
+  }
+  60% {
+    transform: scale(1.2, 1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6, 2);
+    opacity: 0;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.bg {
+  position: absolute;
+  inset: -7px;
+  border-radius: calc(var(--radius) * 1.35);
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.bg::before,
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--radius) * 1.35);
+}
+
+.bg::after {
+  background: var(--navy-deep);
+  box-shadow:
+    inset 0 0 0 1px rgba(59, 130, 246, 0.35),
+    inset -2px 0 0 -1px rgba(96, 165, 250, 0.8),
+    inset 0 -2px 0 -1px rgba(30, 58, 95, 0.5);
+}
+
+.shine {
+  transition: all 0.5s linear;
+  color: rgba(147, 197, 253, 0.85);
+}
+
+.button:active .shine {
+  color: rgba(56, 189, 248, 0.9);
+}
+
+.shine::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  background: currentColor;
+  width: 10px;
+  height: 10px;
+  opacity: 0.3;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+  filter: blur(2px);
+  transform: translateY(0) scale(0);
+  animation: shine 2.2s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateY(0) scale(0);
+  }
+  20% {
+    transform: translateY(0) scale(25);
+  }
+  100% {
+    transform: translateY(-280px) scale(20, 18);
+  }
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.wrapContent {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.button:active .wrapContent {
+  transform: scale(0.97, 0.96);
+}
+
+.content {
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 100%;
+  padding: 2px;
+  background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+  box-shadow:
+    inset 0 0 16px 6px #0c1929,
+    inset 0 -10px 10px -8px #1d4ed8;
+  position: relative;
+}
+
+.button:hover .content {
+  animation: shake 0.5s linear infinite;
+}
+
+@keyframes shake {
+  15% {
+    transform: translate(1px, 1px);
+  }
+  30% {
+    transform: translate(0, -1px);
+  }
+  45% {
+    transform: translate(1px, -1px);
+  }
+  55% {
+    transform: translate(-1px, 1px);
+  }
+  70% {
+    transform: translate(1px, 0);
+  }
+  85% {
+    transform: translate(-1px, -1px);
+  }
+}
+
+.button:focus-visible .content {
+  animation: shake-out 1.9s ease forwards;
+}
+
+@keyframes shake-out {
+  5% {
+    transform: translate(2px, 2px);
+  }
+  10% {
+    transform: translate(0, -2px);
+  }
+  15% {
+    transform: translate(2px, -2px);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  25% {
+    transform: translate(2px, 0);
+  }
+  30% {
+    transform: translate(-2px, -2px);
+  }
+  35% {
+    transform: translate(2px, 2px);
+  }
+  40% {
+    transform: translate(0, -2px);
+  }
+  45% {
+    transform: translate(2px, -2px);
+  }
+  48% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.outline {
+  position: absolute;
+  overflow: hidden;
+  inset: 0;
+  border-radius: inherit;
+  transition: all 0.4s ease;
+}
+
+.outline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 120px;
+  height: 300px;
+  margin: auto;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #60a5fa 50%,
+    transparent 100%
+  );
+  animation: spin 1.7s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.circuit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(420px, 110%);
+  height: auto;
+  margin-top: -8px;
+  pointer-events: none;
+}
+
+.circuit :global(.circuit-bg) {
+  opacity: 0.45;
+}
+
+.circuit :global(.circuit-path) {
+  opacity: 0;
+  transition: opacity 0.4s linear;
+}
+
+.circuit :global(.circuit-path .circuit-side path) {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: line-1 1.7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes line-1 {
+  0% {
+    stroke-dashoffset: 200;
+    filter: blur(2px) brightness(1.6);
+  }
+  70% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.circuit :global(.circuit-path .circuit-bottom path) {
+  stroke-dasharray: 250;
+  stroke-dashoffset: -250;
+  animation: line-2 2.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes line-2 {
+  0% {
+    stroke-dashoffset: -250;
+    filter: blur(2px) brightness(1.6);
+  }
+  70% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.circuit :global(.circuit-path-2 .circuit-side path) {
+  animation-duration: 0.7s;
+}
+
+.circuit :global(.circuit-path-2 .circuit-bottom path) {
+  animation-duration: 0.9s;
+}
+
+.circuit :global(.circuit-path-2 .circuit-side path),
+.circuit :global(.circuit-path-2 .circuit-bottom path) {
+  filter: sepia(20%) saturate(300%) hue-rotate(180deg) brightness(110%)
+    contrast(100%) drop-shadow(0 0 2px #93c5fd);
+}
+
+.button .circuit :global(.circuit-path-1),
+.button:hover .circuit :global(.circuit-path-2) {
+  opacity: 1;
+}
+
+.button:hover .circuit :global(.circuit-path-1) {
+  opacity: 0;
+}
+
+.glyphs {
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  position: relative;
+  height: 100%;
+  gap: 8px;
+  padding: 0 1rem;
+  border-radius: calc(var(--radius) * 0.85);
+  background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+  box-shadow:
+    inset 0 0 16px 6px #0c1929,
+    0 0 10px 10px rgba(0, 0, 0, 0.25),
+    inset 0 -10px 10px -8px #1d4ed8;
+  transition: all 0.3s ease;
+}
+
+.text {
+  transition: all 0.3s ease;
+  transform: translateY(-1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.char {
+  display: block;
+  color: transparent;
+  position: relative;
+}
+
+.char::before,
+.char::after {
+  content: attr(data-label);
+  position: absolute;
+  color: #e2e8f0;
+  text-shadow: 0 2px 3px #1e3a5f;
+  left: 0;
+  white-space: pre;
+}
+
+.char::before {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.button:hover .char::before {
+  animation: char-in 0.7s ease calc(var(--i) * 0.03s);
+}
+
+.button:hover .char::after {
+  opacity: 1;
+  animation: char-out 0.7s ease calc(var(--i) * 0.03s) backwards;
+}
+
+.button:focus-visible .char {
+  animation: char-out-2 0.7s ease forwards calc(var(--i) * -0.02s);
+}
+
+@keyframes char-in {
+  0% {
+    opacity: 0;
+    transform: translateY(60%);
+    filter: blur(20px);
+    color: #1d4ed8;
+  }
+  30% {
+    transform: translateY(-15%);
+    opacity: 1;
+    filter: blur(1px);
+    color: #60a5fa;
+  }
+  60% {
+    transform: translateY(5%);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes char-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-70%);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes char-out-2 {
+  0%,
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-70%);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+.iconBolt {
+  margin-right: -4px;
+  flex-shrink: 0;
+}
+
+.iconBolt svg {
+  height: 30px;
+  width: auto;
+  overflow: visible;
+  fill: #1e293b;
+}
+
+.iconBolt :global(.stroke) {
+  stroke-dasharray: 90;
+  stroke-dashoffset: -90;
+  filter: blur(2px);
+  animation: icon-stroke 3s linear infinite;
+}
+
+.iconBolt :global(.stroke:nth-child(1)) {
+  stroke: #38bdf8;
+  stroke-width: 4px;
+}
+
+.iconBolt :global(.stroke:nth-child(2)) {
+  stroke: #3b82f6;
+  stroke-width: 3px;
+  animation-delay: 1.5s;
+}
+
+@keyframes icon-stroke {
+  0% {
+    stroke-dashoffset: -90;
+  }
+  100% {
+    stroke-dashoffset: 90;
+  }
+}
+
+.iconBolt :global(.lightnings g) {
+  opacity: 0;
+  transition: 0.4s linear;
+}
+
+.button:hover .iconBolt :global(.lightnings g) {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:hover .content,
+  .button:focus-visible .content,
+  .shine::before,
+  .circuit :global(.circuit-path .circuit-side path),
+  .circuit :global(.circuit-path .circuit-bottom path),
+  .outline::before {
+    animation: none;
+  }
+
+  .button:hover :global(.circuit-path-1),
+  .button:hover :global(.circuit-path-2) {
+    opacity: 0.6;
+  }
+}

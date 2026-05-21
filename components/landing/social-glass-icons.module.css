@@ -1,0 +1,242 @@
+.shell {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1rem 1.15rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem 0.25rem;
+}
+
+.iconContent {
+  margin: 0 6px;
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 15px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+.iconContent:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -48px;
+}
+
+.link {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.06)
+  );
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  transition: all 0.35s ease-in-out;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.18),
+    0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.8s ease;
+  z-index: 0;
+}
+
+.link:hover::before {
+  transform: rotate(25deg) translateX(100%);
+}
+
+.link:hover {
+  color: #fff;
+  box-shadow: 3px 2px 45px 0 rgb(0 0 0 / 50%);
+}
+
+.link svg {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+}
+
+.filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  z-index: 0;
+  border-radius: 20%;
+  transition: height 0.3s ease-in-out;
+}
+
+.link:hover .filled {
+  height: 100%;
+}
+
+/* Brand borders */
+.link[data-social="linkedin"] {
+  border: 1px solid rgba(10, 102, 194, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(10, 102, 194, 0.35),
+    0 0 10px rgba(10, 102, 194, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.link[data-social="telegram"] {
+  border: 1px solid rgba(0, 136, 204, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(0, 136, 204, 0.35),
+    0 0 10px rgba(0, 136, 204, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.link[data-social="email"] {
+  border: 1px solid rgba(234, 179, 8, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(234, 179, 8, 0.35),
+    0 0 10px rgba(234, 179, 8, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.link[data-social="github"] {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    inset 0 0 6px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(148, 163, 184, 0.35),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.link[data-social="whatsapp"] {
+  border: 1px solid rgba(37, 211, 102, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(37, 211, 102, 0.35),
+    0 0 10px rgba(37, 211, 102, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes premiumGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.link[data-social="linkedin"] .filled,
+.link[data-social="linkedin"] ~ .tooltip {
+  background: linear-gradient(135deg, #0a2540, #0e4a7a, #0a66c2, #051a2e);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+}
+
+.link[data-social="telegram"] .filled,
+.link[data-social="telegram"] ~ .tooltip {
+  background: linear-gradient(135deg, #0a1f2d, #0f4a66, #0088cc, #0a2e44);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+}
+
+.link[data-social="email"] .filled,
+.link[data-social="email"] ~ .tooltip {
+  background: linear-gradient(135deg, #422006, #854d0e, #eab308, #3f2d0a);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+}
+
+.link[data-social="github"] .filled,
+.link[data-social="github"] ~ .tooltip {
+  background: linear-gradient(135deg, #0f172a, #1e293b, #334155, #020617);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+}
+
+.link[data-social="whatsapp"] .filled,
+.link[data-social="whatsapp"] ~ .tooltip {
+  background: linear-gradient(135deg, #0f3d1f, #146b35, #25d366, #0d2916);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+}
+
+@media (max-width: 640px) {
+  .list {
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .iconContent {
+    margin: 0 4px;
+  }
+
+  .link {
+    width: 46px;
+    height: 46px;
+  }
+
+  .link svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link::before,
+  .filled,
+  .tooltip,
+  .link[data-social] .filled {
+    animation: none;
+    transition: none;
+  }
+}

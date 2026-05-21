@@ -1,0 +1,96 @@
+.shell {
+  --hero-top: clamp(5.25rem, 11vh, 7.5rem);
+  --hero-side-width: 360px;
+  --hero-gap: clamp(1.5rem, 4vh, 3rem);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--hero-top) clamp(1rem, 3vw, 2.5rem) clamp(2rem, 5vh, 3rem);
+  box-sizing: border-box;
+}
+
+.sideColumn {
+  display: none;
+  width: var(--hero-side-width);
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: var(--hero-gap);
+  min-height: calc(100vh - var(--hero-top) - clamp(2rem, 5vh, 3rem));
+  pointer-events: none;
+}
+
+.sideColumn > * {
+  pointer-events: auto;
+}
+
+.mainColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.headlineBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vh, 1.75rem);
+  max-width: 42rem;
+  width: 100%;
+}
+
+.mobileWidgets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 360px;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    display: grid;
+    grid-template-columns: var(--hero-side-width) minmax(0, 1fr);
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+    flex-direction: row;
+  }
+
+  .sideColumn {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .mainColumn {
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+    padding-top: 0.25rem;
+  }
+
+  .mobileWidgets {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .shell {
+    --hero-side-width: 380px;
+    column-gap: 3.5rem;
+  }
+}

@@ -1,0 +1,687 @@
+.root {
+  --ease-elastic: cubic-bezier(0.5, 2, 0.3, 0.8);
+  --navy-deep: #0a1628;
+  --navy-mid: #1e3a5f;
+  --blue-light: #b8d9f5;
+  --blue-pale: #e8f4ff;
+
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.25rem 0 0.5rem;
+}
+
+.output {
+  align-self: center;
+  background: inherit;
+  border-radius: 100px;
+  padding: 0 12px 0 10px;
+  height: 32px;
+  min-width: min(100%, 300px);
+  position: relative;
+  margin-bottom: 1.5rem;
+  z-index: 2;
+}
+
+.output::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(147, 197, 253, 0.25);
+  background: rgba(30, 58, 95, 0.35);
+  opacity: 0.9;
+}
+
+.output::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 14px;
+  height: 8px;
+  background: linear-gradient(0deg, transparent, var(--navy-deep));
+  mix-blend-mode: soft-light;
+  border-radius: 100px;
+}
+
+.cover {
+  position: absolute;
+  inset: 2px;
+  border-radius: 100px;
+  clip-path: inset(0 round 100px);
+  background: var(--navy-deep);
+  filter: blur(4px);
+}
+
+.wrapColors1,
+.wrapColors2 {
+  overflow: hidden;
+  border-radius: 100px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wrapColors1 {
+  opacity: 0.4;
+  filter: blur(3px);
+}
+
+.bgColors {
+  background: conic-gradient(
+    transparent 0deg,
+    #1e3a5f 65deg,
+    #3b82f6 144deg,
+    #60a5fa 180deg,
+    #0ea5e9 260deg,
+    transparent 324deg,
+    transparent 360deg
+  );
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  margin: auto;
+  inset: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(220deg);
+  border-radius: 50%;
+  animation: cycleRotate 4s ease-in-out infinite;
+}
+
+@keyframes cycleRotate {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.area {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  z-index: 1;
+}
+
+.area::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  right: 0;
+  height: 80px;
+  width: 55%;
+  margin: auto;
+  background-color: rgba(59, 130, 246, 0.22);
+  filter: blur(2em);
+  opacity: 0.85;
+  transform: perspective(10px) rotateX(5deg) scale(1, 0.45);
+  z-index: 0;
+}
+
+.ticketMask {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 0 1rem;
+  mask-image: linear-gradient(rgba(0, 0, 0, 0.15) 0%, black 24px, black 92%, transparent);
+}
+
+.ticket {
+  perspective: 2000px;
+  cursor: pointer;
+}
+
+.ticketFlip {
+  transition: transform 0.65s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.ticket:hover .ticketFlip,
+.ticket:focus-within .ticketFlip {
+  transform: rotateY(180deg);
+}
+
+.float {
+  transform-style: preserve-3d;
+  animation: float 3.2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.front,
+.back {
+  display: inline-block;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.front {
+  position: relative;
+  z-index: 1;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: rotateY(-180deg);
+}
+
+.ticketBody {
+  display: block;
+  position: relative;
+  width: 300px;
+  max-width: 100%;
+  margin: 0 auto 18px;
+  border-radius: 7px 7px 0 0;
+  text-align: center;
+  color: var(--navy-deep);
+  background: linear-gradient(to bottom, var(--blue-pale), var(--blue-light));
+  box-shadow: 0 18px 40px -12px rgba(10, 22, 40, 0.55);
+}
+
+.ticketBody::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 7px 7px 0 0;
+  mask-image: linear-gradient(white 50%, transparent 100%);
+  background:
+    radial-gradient(at 30% -5%, #93c5fd, #bfdbfe, transparent 28%),
+    radial-gradient(at 70% 0%, #60a5fa, transparent 22%),
+    linear-gradient(
+      115deg,
+      #dbeafe 5%,
+      #bfdbfe 15%,
+      #93c5fd 35%,
+      #e0f2fe 55%,
+      #b8d9f5 75%
+    );
+  pointer-events: none;
+}
+
+.ticketBody::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  height: 16px;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-size: 16px 16px;
+  background-image: linear-gradient(-135deg, var(--blue-light) 50%, transparent 50%),
+    linear-gradient(-45deg, var(--blue-light) 50%, transparent 50%);
+  pointer-events: none;
+}
+
+.reflex {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  bottom: -5px;
+  z-index: 10;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.reflex::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  top: -10%;
+  bottom: -10%;
+  left: -132%;
+  background: linear-gradient(
+    to right,
+    rgba(224, 242, 254, 0.35) 10%,
+    rgba(191, 219, 254, 0.75) 55%,
+    rgba(224, 242, 254, 0.4) 90%
+  );
+  transform: translateX(0) skew(-30deg);
+  transition: transform 0.7s ease;
+}
+
+.float:hover .reflex::before {
+  transform: translate(260%, 0) skew(-30deg);
+}
+
+.iconCube {
+  position: absolute;
+  height: 108%;
+  z-index: 1;
+  top: -3px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+  color: var(--navy-mid);
+}
+
+.iconCube path {
+  animation-delay: calc(var(--i) * 100ms);
+  transform-origin: center;
+}
+
+.pathCenter {
+  animation: pathCenter 3s ease-in-out infinite;
+}
+
+@keyframes pathCenter {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+.pathT {
+  animation: pathT 1.6s ease-in-out infinite;
+}
+
+@keyframes pathT {
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+.pathTl {
+  animation: pathTl 1.6s ease-in-out infinite;
+}
+
+@keyframes pathTl {
+  50% {
+    transform: translate(1px, 1px);
+  }
+}
+
+.pathTr {
+  animation: pathTr 1.6s ease-in-out infinite;
+}
+
+@keyframes pathTr {
+  50% {
+    transform: translate(-1px, 1px);
+  }
+}
+
+.pathBr {
+  animation: pathBr 1.6s ease-in-out infinite;
+}
+
+@keyframes pathBr {
+  50% {
+    transform: translate(-1px, -1px);
+  }
+}
+
+.pathBl {
+  animation: pathBl 1.6s ease-in-out infinite;
+}
+
+@keyframes pathBl {
+  50% {
+    transform: translate(1px, -1px);
+  }
+}
+
+.pathB {
+  animation: pathB 1.6s ease-in-out infinite;
+}
+
+@keyframes pathB {
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  padding: 14px 15px;
+  border-bottom: 1px dashed rgba(30, 58, 95, 0.35);
+  text-align: left;
+  min-height: 54px;
+}
+
+.header::before,
+.header::after {
+  content: "";
+  display: block;
+  width: 13px;
+  height: 13px;
+  background-color: var(--navy-deep);
+  position: absolute;
+  bottom: -7px;
+  border-radius: 50%;
+  z-index: 11;
+}
+
+.header::before {
+  right: -8px;
+}
+
+.header::after {
+  left: -8px;
+}
+
+.ticketName {
+  font-weight: 300;
+  font-size: 1.02em;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  letter-spacing: -1px;
+}
+
+.nameRow {
+  display: flex;
+  gap: 1px;
+}
+
+.char {
+  display: inline-block;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.barcode {
+  box-shadow:
+    1px 0 0 1px,
+    5px 0 0 1px,
+    10px 0 0 1px,
+    11px 0 0 1px,
+    15px 0 0 1px,
+    18px 0 0 1px,
+    22px 0 0 1px,
+    23px 0 0 1px,
+    26px 0 0 1px,
+    30px 0 0 1px,
+    35px 0 0 1px,
+    37px 0 0 1px,
+    41px 0 0 1px,
+    44px 0 0 1px,
+    47px 0 0 1px,
+    51px 0 0 1px,
+    56px 0 0 1px,
+    59px 0 0 1px,
+    64px 0 0 1px,
+    68px 0 0 1px,
+    72px 0 0 1px,
+    74px 0 0 1px,
+    77px 0 0 1px,
+    81px 0 0 1px,
+    85px 0 0 1px,
+    88px 0 0 1px,
+    92px 0 0 1px,
+    95px 0 0 1px,
+    96px 0 0 1px,
+    97px 0 0 1px;
+  display: inline-block;
+  height: 28px;
+  width: 0;
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  color: var(--navy-mid);
+}
+
+.contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 16px 22px;
+  min-height: 168px;
+  position: relative;
+  z-index: 2;
+}
+
+.event {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  margin-top: -24px;
+  font-weight: 600;
+}
+
+.eventLine {
+  display: flex;
+  align-items: baseline;
+  height: 42px;
+}
+
+.eventLarge {
+  font-size: 2.65rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.eventBold {
+  font-size: 1.95rem;
+  font-weight: 800;
+  margin-right: -2px;
+}
+
+.eventSub {
+  font-size: 12px;
+  letter-spacing: 0.42em;
+  margin-left: 6px;
+  color: rgba(30, 58, 95, 0.45);
+  text-transform: uppercase;
+}
+
+.number {
+  position: absolute;
+  left: 14px;
+  bottom: -4px;
+  font-size: 1.75em;
+  color: #7eb3e8;
+  font-weight: 800;
+}
+
+.qrWrap {
+  position: absolute;
+  z-index: 1;
+  color: #6b8fc7;
+}
+
+.qrFront {
+  right: 4px;
+  bottom: -4px;
+}
+
+.qrFront img {
+  display: block;
+  height: 68px;
+  width: 68px;
+  border-radius: 4px;
+}
+
+.qrBack {
+  position: relative;
+  margin-top: 6px;
+}
+
+.qrBack img {
+  display: block;
+  height: 120px;
+  width: 120px;
+  border-radius: 6px;
+}
+
+.qrBack::after {
+  --stroke-width: 0.2rem;
+  --corner-size: 0.85rem;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, currentColor var(--stroke-width), transparent)
+      0 0,
+    linear-gradient(to right, currentColor var(--stroke-width), transparent) 0
+      100%,
+    linear-gradient(to left, currentColor var(--stroke-width), transparent)
+      100% 0,
+    linear-gradient(to left, currentColor var(--stroke-width), transparent)
+      100% 100%,
+    linear-gradient(to bottom, currentColor var(--stroke-width), transparent)
+      0 0,
+    linear-gradient(to bottom, currentColor var(--stroke-width), transparent)
+      100% 0,
+    linear-gradient(to top, currentColor var(--stroke-width), transparent) 0
+      100%,
+    linear-gradient(to top, currentColor var(--stroke-width), transparent) 100%
+      100%;
+  background-size: var(--corner-size) var(--corner-size);
+  background-repeat: no-repeat;
+  animation: breath 3s var(--ease-elastic) infinite;
+}
+
+@keyframes breath {
+  0%,
+  100% {
+    transform: scale(1.04);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+.date {
+  display: flex;
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.slash {
+  padding: 0 1px;
+  color: rgba(30, 58, 95, 0.4);
+  font-weight: 400;
+}
+
+.backRole {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(30, 58, 95, 0.55);
+  margin-top: 4px;
+}
+
+.front .header .char {
+  opacity: 0;
+  animation: appear 0.5s var(--ease-elastic) forwards
+    calc(var(--i) * 20ms + 400ms);
+}
+
+.ticket:hover .front .header .char {
+  animation: appearOut 0.35s ease forwards;
+}
+
+.back .header .char {
+  opacity: 0;
+}
+
+.ticket:hover .back .header .char {
+  animation: appear 0.5s var(--ease-elastic) forwards
+    calc(var(--i) * 20ms + 400ms);
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appearOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.hint {
+  margin-top: 0.35rem;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.75);
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  mask-image: linear-gradient(
+    transparent 5%,
+    white 30%,
+    white 70%,
+    transparent 95%
+  );
+  filter: grayscale(1);
+  pointer-events: none;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .bgColors,
+  .iconCube path,
+  .qrBack::after,
+  .front .header .char,
+  .ticket:hover .back .header .char {
+    animation: none;
+  }
+
+  .ticket:hover .ticketFlip {
+    transform: none;
+  }
+
+  .front .header .char,
+  .back .header .char {
+    opacity: 1;
+    transform: none;
+  }
+}
